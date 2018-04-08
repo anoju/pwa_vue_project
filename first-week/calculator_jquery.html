@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 'Noto Sans KR'-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+        body{font-family: 'Noto Sans KR';}
+        ul,li{padding: 0;margin: 0;list-style: none}
+        .wrap{width: 360px;margin: 10px auto;padding: 10px;background: #eaeaea;}
+        .wrap li{padding: 10px 0;}
+        .wrap li +li{border-top: 1px solid #ccc;}
+        .wrap .screen{width: 100%;box-sizing: border-box;text-align: right;padding:10px;font-size: 1.25em;font-weight: bold;background: #fff;}
+        .wrap p{font-size: 0.875em;text-align: center;margin: 0;}
+        .keypad{width: 100%;}
+        .keypad td{width: 25%;}
+        .keypad button{display: block;width: 100%;padding: 5px 0;font-size: 1.125em;background: #fff;border: 0 none;}
+        .keypad .mark{background: #ddd;}
+        .keypad .enter,
+        .keypad .reset{background: #ccc;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul>
+            <li>
+                <input type="text" class="screen" placeholder="0">
+            </li>
+            <li>
+                <table class="keypad">
+                    <tbody>
+                        <tr>
+                            <td><button>1</button></td>
+                            <td><button>2</button></td>
+                            <td><button>3</button></td>
+                            <td><button class="mark">+</button></td>
+                        </tr>
+                        <tr>
+                            <td><button>4</button></td>
+                            <td><button>5</button></td>
+                            <td><button>6</button></td>
+                            <td><button class="mark">-</button></td>
+                        </tr>
+                        <tr>
+                            <td><button>7</button></td>
+                            <td><button>8</button></td>
+                            <td><button>9</button></td>
+                            <td><button class="mark">*</button></td>
+                        </tr>
+                        <tr>
+                            <td><button class="reset">C</button></td>
+                            <td><button>0</button></td>
+                            <td></td>
+                            <td><button class="mark">/</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><button class="enter">Enter</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li><p>오른쪽 숫자 키패드에서도 작동합니다.</p></li>
+        </ul>
+    </div>
+<script>
+    $(function(){
+        var $screen = $('.screen'),
+            $btn = $('.keypad button');
+
+        $btn.click(function(e){
+            e.preventDefault();
+            var $txt = $(this).text();
+            if($(this).hasClass('enter')){
+                numComplate($screen);
+            }else if($(this).hasClass('reset')){                
+                numReset($screen);
+            }else{
+                numAdd($screen,$txt);
+            }
+        });
+        $screen.keydown(function(e){
+            var $key = e.which;
+            //console.log($key)
+            if($key == 13){
+                numComplate($screen);
+            }else if($key == 27){
+                numReset($screen);
+            }else if($key < 96 || $key > 111){
+                e.preventDefault();                
+            }
+        });
+        
+        function numAdd(tar,num){
+            tar.val(tar.val()+num);
+        }
+        function numReset(tar){
+            tar.val('');
+        }
+        function numComplate(tar){
+            var $val = tar.val();
+            if($val != ''){
+                var $eval= eval($val);
+                tar.val($eval);
+            }else{
+                alert('계산을 입력해주세요');
+            }
+        }
+    })
+</script>
+</body>
+</html>
