@@ -97,13 +97,13 @@
         }
     });
     
-    function numAdd(tar,num){
+    var numAdd = function(tar,num){
         tar.value = tar.value+num;
     }
-    function numReset(tar){
+    var numReset = function(tar){
         tar.value = '';
     }
-    function numComplate(tar){
+    var numComplate = function(tar){
         var $val = tar.value;
         if($val != ''){
             var $eval= eval($val);
