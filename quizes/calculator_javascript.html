@@ -69,7 +69,8 @@
     </div>
 <script>
     var $screen = document.querySelector('.screen'),
-        $btn = document.querySelectorAll('.keypad button');
+        $btn = document.querySelectorAll('.keypad button'),
+        $first = true, $end = false;
 
     for (var i = 0; i < $btn.length; i++) {
         $btn[i].addEventListener('click', function(e) {
@@ -77,37 +78,91 @@
             var $txt = this.innerHTML;
             //console.log($txt)
             if(this.classList.contains('enter') == true){
-                numComplate($screen);
+                calculationComplate($screen);
             }else if(this.classList.contains('reset') == true){                
-                numReset($screen);
+                calculationReset($screen);
+            }else if(this.classList.contains('mark') == true){ 
+                if($first != true){
+                    calculationAdd($screen,$txt);
+                    $first = true,$end = false;
+                }else{
+                    calculationMark($screen,$txt);
+                }
             }else{
-                numAdd($screen,$txt);
+                if($end == true){
+                    calculationReset($screen);
+                }
+                calculationAdd($screen,$txt);
+                $first = false;
             }
         });
     }
     $screen.addEventListener('keydown' ,function(e){
-        var $key = e.keyCode;
-        //console.log($key)
-        if($key == 13){
-            numComplate($screen);
-        }else if($key == 27){
-            numReset($screen);
-        }else if($key < 96 || $key > 111){
-            e.preventDefault();                
+        var $keycode = e.keyCode,
+            $key = '';
+        //console.log($keycode)
+        if($keycode == 13){                
+            $key = 'enter';
+        }else if($keycode == 27){
+            $key = 'reset';
+        }if($keycode >= 96 && $keycode <= 111){
+            if($keycode == 106 || $keycode == 107 || $keycode == 109 || $keycode == 111){
+                $key = 'mark';
+            }else{
+                $key = 'number';
+            }
+        }
+         //console.log($key)
+         switch($key){
+            case 'enter':
+                calculationComplate($screen);
+                break;
+            case 'reset':
+                calculationReset($screen);
+                break;
+            case 'mark':
+                if($first != true){
+                    $first = true,$end = false;
+                }else{
+                    calculationMark($screen);
+                }
+                break;
+            case 'number':
+                if($end == true){
+                    calculationReset($screen);
+                }
+                $first = false;
+                break;
+            default:
+                e.preventDefault();
+                break;
         }
     });
     
-    var numAdd = function(tar,num){
+    var calculationAdd = function(tar,num){
         tar.value = tar.value+num;
     }
-    var numReset = function(tar){
-        tar.value = '';
+    var calculationMark = function (tar,num){
+        var $val = tar.value,
+            $last = $val.length -1,
+            $substr = $val.substr( 0,$last);
+        
+        if(num){
+            tar.value = $substr+num;
+        }else{
+            tar.value = $substr;
+        }
     }
-    var numComplate = function(tar){
+    var calculationReset = function(tar){
+        tar.value = '';
+        $first = true, $end = false;
+    }
+    var calculationComplate = function(tar){
         var $val = tar.value;
         if($val != ''){
             var $eval= eval($val);
             tar.value = $eval;
+            $end = true;
         }else{
             alert('계산을 입력해주세요');
         }
