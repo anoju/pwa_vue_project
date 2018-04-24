@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script href="/dist/bundle.js" defer></script>
+</head>
+<body>
+    <h1>Hello SW!!</h1>
+    <img src="/images/test.jpg" alt="">
+
+    
+    <script>
+        if('serviceWorker' in navigator){
+            navigator.serviceWorker.register('./sw.js')
+                //성공했을때    
+                .then(function(swReg){
+                    console.log(swReg,'is service worker object');
+                })
+                //실패했을때
+                .catch(function(err){
+                    console.log(err,'실패 했을때의 오류 전보');
+                });
+        }
+    </script>
+    
+</body>
+</html>
