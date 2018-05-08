@@ -93,6 +93,7 @@ function updateSubscriptionOnServer(subscription, unsubscribed) {
 
   if (unsubscribed) {
     subscriptionDetails.classList.add('is-invisible');
+    removeDeviceKeyInFirebase(subscription.endpoint.split('send/')[1]);
   } else {
     subscriptionJson.textContent = JSON.stringify(subscription);
     subscriptionDetails.classList.remove('is-invisible');

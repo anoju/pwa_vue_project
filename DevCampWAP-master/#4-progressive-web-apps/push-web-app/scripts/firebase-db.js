@@ -13,6 +13,14 @@ function sendDeviceKeytoFirebase(key) {
   });
 }
 
+function removeDeviceKeyInFirebase(key) {
+  return db.ref('users/browserKey-' + getID()).remove().then(function (result) {
+    console.log("The key has been deleted in Firebase DB");
+  }).catch(function () {
+    console.error('Deleting the key has been failed');
+  });
+}
+
 function getID() {
   var date = new Date();
   return date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds();
