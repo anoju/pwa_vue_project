@@ -1,0 +1,20 @@
+5주차 
+
+*크롬 뷰 관리자도구 설치 및 세팅
+https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
+설정 > 도구더보기 > 확장프로그램 > 세부정보 : 파일 URL대한 액세스허용
+
+ajax 통신
+https://github.com/axios/axios
+
+vue-single
+npm i vue-cli -g
+vue init webpack-simple
+npm i
+
+
+localStorage.setItem(키값, 밸류)
+localStorage.removeItem(키값)
+
+var str = JSON.stringify([{item:'1'},{item:'2'}])
+localStorage.setItem('VUE', str)

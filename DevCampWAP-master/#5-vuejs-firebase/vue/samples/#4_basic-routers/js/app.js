@@ -19,6 +19,7 @@ var routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 var router = new VueRouter({
+  //mode: 'history', //로컬 파일경로로는 안됨(서버 돌려야함)
   routes
 })
 

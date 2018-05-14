@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <child-cmp v-bind:propsdata="msg" v-on:passAlert="상위컴포넌트 이름"></child-cmp> -->
+        <child-cmp v-bind:propsdata="msg" v-on:pass-alert="showAlert"></child-cmp>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+    Vue.component('child-cmp',{
+        props:['propsdata'],
+        template: `
+            <div>
+                child component <br>
+                {{propsdata}}
+                <button v-on:click="popupAlert">click me</button>
+            </div>
+        `,
+        methods:{
+            popupAlert: function(){
+                this.$emit('pass-alert');
+            }
+        }
+    })
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            msg: 'parent component' 
+        },
+        methods:{
+            showAlert: function(){
+                alert('show alert');
+            }
+        }
+    })
+
+    </script>
+</body>
+</html>
