@@ -4,13 +4,16 @@
 https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
 설정 > 도구더보기 > 확장프로그램 > 세부정보 : 파일 URL대한 액세스허용
 
+
 ajax 통신
 https://github.com/axios/axios
+
 
 vue-single
 npm i vue-cli -g
 vue init webpack-simple
 npm i
+npm run dev
 
 
 localStorage.setItem(키값, 밸류)
