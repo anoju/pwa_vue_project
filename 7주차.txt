@@ -1,0 +1,6 @@
+7ÁÖÂ÷ 
+npm install vue-router
+npm install chart.js --save
+npm i vuex --save
+
+npm install -g firebase-tools
