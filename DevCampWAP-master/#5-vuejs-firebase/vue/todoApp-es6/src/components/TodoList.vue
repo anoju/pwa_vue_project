@@ -2,7 +2,8 @@
     <div>
     <transition-group name="list" tag="ul">
         <!-- <li v-for="(todoItem,index) in propsdata" class="shadow" v-bind:key="todoItem"> -->
-          <li v-for="(todoItem,index) in this.$store.state.todoItems" class="shadow" v-bind:key="todoItem">
+          <!-- <li v-for="(todoItem,index) in this.$store.state.todoItems" class="shadow" v-bind:key="todoItem"> -->
+          <li v-for="(todoItem,index) in todoItems" class="shadow" v-bind:key="todoItem">
             <i class="checkBtn fa fa-check" aria-hidden="true"></i>
             {{index}} - {{todoItem}}
             <!-- <button class="removeBtn" type="button" @click="removeTodo(todoItem,index)">
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import {mapState,mapGetters, mapMutations} from 'vuex'
 export default {
     //props:['propsdata'],    
     methods: {
@@ -38,7 +39,12 @@ export default {
             // this.$store.commit('removeTodoItem',obj)
             //this.$store.commit('removeTodoItem',{item,index});
         //}
-    }
+    },
+    computed: {
+    ...mapGetters({
+      todoItems: 'getTodoItems'
+    })
+  }
 }
 </script>
 

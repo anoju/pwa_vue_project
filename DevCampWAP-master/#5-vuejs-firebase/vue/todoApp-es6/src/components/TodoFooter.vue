@@ -5,12 +5,20 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
-    methods:{
+    methods:{        
+        /*
         clearTodo(){
             //this.$emit('clearItem');
             this.$store.commit('clearTodoItem');
         }
+        */
+
+       //화면에서 특정 이벤트 발생 -> 현재 컴포넌트의 메서드로 연결 -> 메서드와 연결된 Vuex의 Mutations
+        ...mapMutations({
+            clearTodo : 'clearTodoItem'
+        })
     }
 }
 </script>
